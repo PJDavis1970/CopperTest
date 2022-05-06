@@ -86,15 +86,16 @@ class OrdersModelManager {
             transaction.setValue(trans.currency, forKeyPath: "currency")
             transaction.setValue(trans.createdAt, forKeyPath: "createdAt")
             transaction.setValue(trans.amount, forKeyPath: "amount")
+            self.transactions.append(transaction)
+
+        }
+        do {
             
-            do {
-                
-                try managedContext.save()
-                self.transactions.append(transaction)
-            } catch let error as NSError {
-                
-                print("Could not save. \(error), \(error.userInfo)")
-            }
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
     
